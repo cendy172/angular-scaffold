@@ -1,9 +1,10 @@
 var gulp = require('gulp');
 var plugins = require("gulp-load-plugins")();
+var karma = require('karma').Server;
 
 gulp.task('scripts', function(){
     //combine all js files of the app
-    gulp.src(['!./app/**/*_test.js','./app/**/*.js'])
+    gulp.src(['./app/**/*.js'])
         .pipe(plugins.jshint())
         .pipe(plugins.jshint.reporter('default'))
         .pipe(plugins.sourcemaps.init())
@@ -64,7 +65,13 @@ gulp.task('watch',function(){
     gulp.watch(['!./app/index.html','./app/**/*.html'],['templates']);
     gulp.watch('./app/**/*.css',['css']);
     gulp.watch('./app/index.html',['copy-index']);
+});
 
+gulp.task('karma', function(done){
+    new karma({
+    configFile: __dirname + '/test/config/karma-unit.js',
+    singleRun: true
+  }, done).start();
 });
 
 gulp.task('connect', function() {
