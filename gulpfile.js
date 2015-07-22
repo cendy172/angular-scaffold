@@ -2,6 +2,8 @@ var gulp = require('gulp');
 var plugins = require("gulp-load-plugins")();
 var karma = require('karma').Server;
 
+var MAP_DEST = './maps';
+
 gulp.task('scripts', function(){
     //combine all js files of the app
     gulp.src(['./app/**/*.js'])
@@ -10,7 +12,7 @@ gulp.task('scripts', function(){
         .pipe(plugins.sourcemaps.init())
         .pipe(plugins.concat('app.js'))
         .pipe(plugins.uglify())
-        .pipe(plugins.sourcemaps.write('./maps'))
+        .pipe(plugins.sourcemaps.write(MAP_DEST))
         .pipe(gulp.dest('./build'));
 });
 
@@ -35,7 +37,7 @@ gulp.task('vendorJS', function(){
     .pipe(plugins.sourcemaps.init())
         .pipe(plugins.concat('lib.js'))
         .pipe(plugins.uglify())
-        .pipe(plugins.sourcemaps.write('./maps'))
+        .pipe(plugins.sourcemaps.write(MAP_DEST))
         .pipe(gulp.dest('./build'));
 });
 
