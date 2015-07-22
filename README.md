@@ -1,5 +1,5 @@
 # angular-scaffold
-AngularJS, Gulp, Uglify, SourceMaps, Karma
+AngularJS, Gulp, Uglify, SourceMaps, Karma, Coverage
 
 > **Note:**
  please update dependencies after checkout.
