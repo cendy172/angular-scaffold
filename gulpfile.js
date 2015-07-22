@@ -26,7 +26,10 @@ gulp.task('templates',function(){
 
 gulp.task('css', function(){
     gulp.src('./app/**/*.css')
+        .pipe(plugins.sourcemaps.init())
         .pipe(plugins.concat('app.css'))
+        .pipe(plugins.minifyCss({compatibility: 'ie8'}))
+        .pipe(plugins.sourcemaps.write(MAP_DEST))
         .pipe(gulp.dest('./build'));
 });
 
@@ -45,7 +48,10 @@ gulp.task('vendorCSS', function(){
     //concatenate vendor CSS files
     gulp.src(['!./bower_components/**/*.min.css',
         './bower_components/**/*.css'])
+        .pipe(plugins.sourcemaps.init())
         .pipe(plugins.concat('lib.css'))
+        .pipe(plugins.minifyCss({compatibility: 'ie8'}))
+        .pipe(plugins.sourcemaps.write(MAP_DEST))
         .pipe(gulp.dest('./build'));
 });
 
